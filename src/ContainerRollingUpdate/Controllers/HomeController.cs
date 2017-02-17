@@ -13,6 +13,11 @@ namespace ContainerRollingUpdate.Controllers
             return View();
         }
 
+        public IActionResult RefreshData()
+        {
+            return ViewComponent("ServerDetails");
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

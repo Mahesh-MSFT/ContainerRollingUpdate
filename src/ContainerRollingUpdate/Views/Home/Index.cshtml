@@ -1,21 +1,26 @@
-﻿@using System.Reflection;
-
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="row">
     <div class="col-md-12">
         <h2>Application uses</h2>
-        <ul>
-            @{
-            var appName = Assembly.GetEntryAssembly().GetName().Name;
-            var appVersion = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-
-            <li>Application: @appName</li>
-            <li>Version: @appVersion</li>
-
-            }
-        </ul>
+        <div id="myComponentContainer">
+            @Component.InvokeAsync("ServerDetails").Result 
+        </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        var refreshComponent = function () {
+            $.get("Home/RefreshData", function (data) {
+                $("#myComponentContainer").html(data);
+            });
+        };
+
+        $(function () { window.setInterval(refreshComponent, 1000); });
+    });
+
+
+</script>
