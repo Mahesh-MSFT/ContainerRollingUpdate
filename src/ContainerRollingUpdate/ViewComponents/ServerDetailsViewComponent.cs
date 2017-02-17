@@ -16,7 +16,9 @@ namespace ContainerRollingUpdate.ViewComponents
             {
                 AppName = Assembly.GetEntryAssembly().GetName().Name,
                 AppVersion = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion,
-                Time = DateTime.UtcNow.ToLocalTime().ToString()
+                Time = DateTime.UtcNow.ToLocalTime().ToString(),
+                Server = Environment.MachineName,
+                OS = System.Runtime.InteropServices.RuntimeInformation.OSDescription
             });
 
             return View(serverDatails);
