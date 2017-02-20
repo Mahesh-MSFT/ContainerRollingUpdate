@@ -1,10 +1,58 @@
 ﻿@model ContainerRollingUpdate.Models.ServerDatails
+@using Newtonsoft.Json
 
-<ul>
-    <li>Application: @Model.AppName</li>
+
+<ul style="font-size:xx-large">
+    <li id="appname">Application: @Model.AppName</li>
     <li>Version: @Model.AppVersion</li>
-    <li>Time: @Model.Time</li>
+    <li id="time">Time: @Model.Time</li>
     <li>Server: @Model.Server</li>
     <li>OS: @Model.OS</li>
 </ul>
+
+
+<script type="text/javascript">
+    $(function () {
+        var refreshComponent = function () {
+
+            //var inputdata = @Html.Raw(JsonConvert.SerializeObject(this.Model));
+
+            $.post("Home/RefreshData", function (data) {
+                $("#myComponentContainer").html(data);
+            });
+
+            //$('#time').on('change', function () {
+            //    alert($(this).data('text'));
+            //    alert($(this).text());
+            //});
+
+            $('#time').on('contentChanged', function () { alert('time content changed!!!'); });
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "Home/RefreshData",
+            //    data: inputdata,
+            //    dataType: "json",
+            //    success: function (response) {
+            //        $("#myComponentContainer").html(response.data);
+            //    }
+            //    ,
+            //    //failure: function (response) {
+            //    //    //alert(response.responseText);
+            //    //},
+            //    error: function (response) {
+            //        //alert(response);
+            //        $("#myComponentContainer").html(response.responseText)
+            //    }
+            //});
+        };
+
+        $(function () { window.setInterval(refreshComponent, 1000); });
+
+       
+
+    });
+
+  
+</script>
 

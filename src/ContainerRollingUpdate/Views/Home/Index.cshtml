@@ -10,17 +10,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(function () {
-        var refreshComponent = function () {
-            $.get("Home/RefreshData", function (data) {
-                $("#myComponentContainer").html(data);
-            });
-        };
-
-        $(function () { window.setInterval(refreshComponent, 1000); });
-    });
-
-
-</script>
